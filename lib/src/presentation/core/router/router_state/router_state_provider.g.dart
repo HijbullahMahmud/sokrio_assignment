@@ -41,7 +41,7 @@ final class RouterStateProvider
   }
 }
 
-String _$routerStateHash() => r'685fe2664a566d80a923b01d45c1f918b374c0e0';
+String _$routerStateHash() => r'94092fcb50691f5d6e4b9428c5f21ee750ec8c35';
 
 abstract class _$RouterState extends $Notifier<String?> {
   String? build();

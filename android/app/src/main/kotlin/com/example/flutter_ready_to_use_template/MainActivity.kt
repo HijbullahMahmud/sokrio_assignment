@@ -1,4 +1,4 @@
-package com.example.flutter_ready_to_use_template
+package com.hijbullah.sokrio
 
 import io.flutter.embedding.android.FlutterActivity
 

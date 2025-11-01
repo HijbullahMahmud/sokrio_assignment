@@ -2,8 +2,8 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_ready_to_use_template/src/core/logger/log.dart';
-import 'package:flutter_ready_to_use_template/src/data/services/network/exceptions/network_error_parser.dart';
+import 'package:sokrio_assignment/src/core/logger/log.dart';
+import 'package:sokrio_assignment/src/data/services/network/exceptions/network_error_parser.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'exceptions/failure.dart';

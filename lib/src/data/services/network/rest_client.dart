@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_ready_to_use_template/src/core/constants/api_endpoints.dart';
+import 'package:sokrio_assignment/src/core/constants/api_endpoints.dart';
 import 'package:retrofit/retrofit.dart';
 
 part 'rest_client.g.dart';

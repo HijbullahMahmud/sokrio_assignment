@@ -1,4 +1,4 @@
-import 'package:flutter_ready_to_use_template/src/data/services/network/rest_client.dart';
+import 'package:sokrio_assignment/src/data/services/network/rest_client.dart';
 
 import '../../core/base/failure.dart';
 import '../../core/base/result.dart';

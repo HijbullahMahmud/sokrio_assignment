@@ -1,6 +1,6 @@
-# 🏗️ Flutter Clean Architecture Template
+# 🏗️ Sokrio Assignment
 
-A **production-ready Flutter boilerplate** built with:
+A **production-ready Flutter app** built with:
 
 - 🧱 Clean Architecture (Data, Domain, Presentation)
 - 💡 SOLID Principles

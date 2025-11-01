@@ -7,6 +7,7 @@ part 'app_startup_provider.g.dart';
 
 @Riverpod(keepAlive: true)
 Future<void> appStartup(Ref ref) async {
+  
   ref.onDispose(() {
     ref.invalidate(sharedPreferencesProvider);
   });
