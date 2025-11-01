@@ -2,27 +2,25 @@ import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:sokrio_assignment/src/core/constants/api_endpoints.dart';
 import 'package:sokrio_assignment/src/core/logger/log.dart';
 import 'package:sokrio_assignment/src/data/services/network/exceptions/network_error_parser.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import 'exceptions/failure.dart';
 
 class NetworkService {
-  final String baseUrl;
-  final Ref ref;
   late final Dio _dio;
 
-  factory NetworkService({required Ref ref, required String baseUrl}) {
-    return NetworkService._internal(ref: ref, baseUrl: baseUrl);
+  factory NetworkService() {
+    return NetworkService._internal();
   }
 
-  NetworkService._internal({required this.ref, required this.baseUrl}) {
+  NetworkService._internal() {
     final options = BaseOptions(
-      baseUrl: baseUrl,
+      baseUrl: ApiEndpoints.base,
       connectTimeout: const Duration(seconds: 60),
       receiveTimeout: const Duration(seconds: 60),
-      headers: {'Accept': 'application/json'},
+      headers: {'Accept': 'application/json', 'x-api-key': ApiEndpoints.apiKey},
     );
 
     _dio = Dio(options);
@@ -67,12 +65,14 @@ class NetworkService {
     String path, {
     Map<String, dynamic>? queryParameters,
     Options? options,
+    CancelToken? cancelToken,
   }) async {
     try {
       final response = await _dio.get(
         path,
         queryParameters: queryParameters,
         options: options,
+        cancelToken: cancelToken,
       );
       return Right(response);
     } catch (e) {

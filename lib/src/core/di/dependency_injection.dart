@@ -1,84 +1,42 @@
-import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
-import 'package:sokrio_assignment/src/data/services/network/rest_client.dart';
-import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:sokrio_assignment/src/data/datasources/user_list_datasource.dart';
+import 'package:sokrio_assignment/src/data/datasources/user_list_datasource_impl.dart';
+import 'package:sokrio_assignment/src/data/repositories/user_list_repository_impl.dart';
+import 'package:sokrio_assignment/src/data/services/cache/cache_service.dart';
+import 'package:sokrio_assignment/src/data/services/network/network_service.dart';
+import 'package:sokrio_assignment/src/domain/repositories/user_list_repository.dart';
+import 'package:sokrio_assignment/src/domain/use_cases/user_list_usecase.dart';
 
-import '../../data/repositories/authentication_repository_impl.dart';
-import '../../data/repositories/locale_repository_impl.dart';
-import '../../data/services/cache/cache_service.dart';
-import '../../domain/repositories/authentication_repository.dart';
-import '../../domain/repositories/locale_repository.dart';
-import '../../domain/use_cases/locale_use_case.dart';
-import '../../domain/use_cases/reset_repository_use_case.dart';
+final injector = GetIt.instance;
 
-part 'dependency_injection.g.dart';
+Future<void> initDependencies() async {
+  // --- SharedPreferences ---
+  // final sharedPrefs = await SharedPreferences.getInstance();
+  // injector.registerLazySingleton<CacheService>(
+  //   () => SharedPreferencesService(sharedPrefs),
+  // );
 
-//------------Externals---------------//
-@Riverpod(keepAlive: true)
-Future<SharedPreferences> sharedPreferences(Ref ref) =>
-    SharedPreferences.getInstance();
-
-@riverpod
-Dio dio(Ref ref) {
-  final dio = Dio();
-
-  dio.interceptors.addAll([
-    if (kDebugMode) PrettyDioLogger(requestHeader: true, requestBody: true),
-  ]);
-
-  dio.options.headers['Content-Type'] = 'application/json';
-
-  return dio;
+  //---Network service---//
+  injector.registerLazySingleton<NetworkService>(() => NetworkService());
 }
 
-// @riverpod
-// NetworkService networkService(Ref ref) {
-//   final baseUrl = ApiEndpoints.base;
-//   return NetworkService(ref: ref, baseUrl: baseUrl);
-// }
-
-//---------------services---------------//
-@Riverpod(keepAlive: true)
-CacheService cacheService(Ref ref) {
-  return SharedPreferencesService(
-    ref.read(sharedPreferencesProvider).requireValue,
+void initDatasources() {
+  injector.registerFactory<UserListDatasource>(
+    () =>
+        UserListDatasourceImpl(networkService: injector.get<NetworkService>()),
   );
 }
 
-@riverpod
-RestClient restClientService(Ref ref) {
-  return RestClient(ref.read(dioProvider));
-}
-
-//-------------repository-----------//
-@Riverpod(keepAlive: true)
-AuthenticationRepository authenticationRepository(Ref ref) {
-  return AuthenticationRepositoryImpl(
-    remote: ref.read(restClientServiceProvider),
-    local: ref.read(cacheServiceProvider),
+void initRepositories() {
+  injector.registerFactory<UserListRepository>(
+    () =>
+        UserListRepositoryImpl(datasource: injector.get<UserListDatasource>()),
   );
 }
 
-@Riverpod(keepAlive: true)
-LocaleRepository localeRepository(Ref ref) {
-  return LocaleRepositoryImpl(ref.read(cacheServiceProvider));
-}
-
-//-------------usecases-----------//
-
-@riverpod
-GetCurrentLocaleUseCase getCurrentLocaleUseCase(Ref ref) {
-  return GetCurrentLocaleUseCase(ref.read(localeRepositoryProvider));
-}
-
-@riverpod
-SetCurrentLocaleUseCase setCurrentLocaleUseCase(Ref ref) {
-  return SetCurrentLocaleUseCase(ref.read(localeRepositoryProvider));
-}
-
-@riverpod
-ResetRepositoryUseCase resetRepositoryUseCase(Ref ref) {
-  return const ResetRepositoryUseCase();
+void initUsecases() {
+  injector.registerFactory<UserListUsecase>(
+    () => UserListUsecase(repository: injector.get<UserListRepository>()),
+  );
 }
