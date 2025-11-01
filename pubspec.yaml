@@ -9,6 +9,7 @@ environment:
   sdk: ^3.9.2
 
 dependencies:
+  connectivity_plus: ^7.0.0
   cupertino_icons: ^1.0.8
   dart_mappable: ^4.6.1
   dartz: ^0.10.1

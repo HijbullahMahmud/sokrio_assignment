@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sokrio_assignment/src/domain/entities/user.dart';
 
 class UserDetailScreen extends StatelessWidget {
-  final User user;
-  const UserDetailScreen({super.key, required this.user});
+  final String firstName;
+  final String lastName;
+  final String avatar;
+  final String email;
+
+  const UserDetailScreen({
+    super.key,
+    required this.firstName,
+    required this.lastName,
+    required this.avatar,
+    required this.email,
+  });
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +25,7 @@ class UserDetailScreen extends StatelessWidget {
           children: [
             ClipOval(
               child: Image.network(
-                user.avatar,
+                avatar,
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
@@ -25,10 +34,10 @@ class UserDetailScreen extends StatelessWidget {
               ),
             ),
             Text(
-              "${user.firstName} ${user.lastName}",
+              "$firstName $lastName",
               style: Theme.of(context).textTheme.titleLarge,
             ),
-            Text(user.email, style: Theme.of(context).textTheme.bodyMedium),
+            Text(email, style: Theme.of(context).textTheme.bodyMedium),
           ],
         ),
       ),

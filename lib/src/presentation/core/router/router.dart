@@ -1,8 +1,8 @@
+
 import 'package:flutter/material.dart';
 
 import 'package:go_router/go_router.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:sokrio_assignment/src/domain/entities/user.dart';
 import 'package:sokrio_assignment/src/presentation/features/home/view/user_detail_screen.dart';
 
 import '../../../core/extensions/riverpod_extensions.dart';

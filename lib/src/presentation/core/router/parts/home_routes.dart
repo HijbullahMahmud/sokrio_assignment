@@ -13,8 +13,19 @@ List<GoRoute> _homeRoutes(Ref ref) {
           path: Routes.detail,
           name: Routes.detail,
           pageBuilder: (context, state) {
-            User user = state.extra as User;
-            return MaterialPage(child: UserDetailScreen(user: user));
+            final email = state.uri.queryParameters['email']!;
+            final firstName = state.uri.queryParameters['firstName']!;
+            final lastName = state.uri.queryParameters['lastName']!;
+            final avatar = state.uri.queryParameters['avatar']!;
+
+            return MaterialPage(
+              child: UserDetailScreen(
+                email: email,
+                firstName: firstName,
+                lastName: lastName,
+                avatar: avatar,
+              ),
+            );
           },
         ),
       ],

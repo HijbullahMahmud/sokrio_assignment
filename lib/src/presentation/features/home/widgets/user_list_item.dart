@@ -11,7 +11,15 @@ class UserListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: () {
-        context.pushNamed(Routes.detail, extra: user);
+        context.pushNamed(
+          Routes.detail,
+          queryParameters: {
+            'email': user.email,
+            'firstName': user.firstName,
+            'lastName': user.lastName,
+            'avatar': user.avatar,
+          },
+        );
       },
       title: Text("${user.firstName} ${user.lastName}"),
       leading: CircleAvatar(backgroundImage: NetworkImage(user.avatar)),

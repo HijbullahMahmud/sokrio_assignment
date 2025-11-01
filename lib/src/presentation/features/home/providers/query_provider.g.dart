@@ -9,28 +9,27 @@ part of 'query_provider.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint, type=warning
 
-@ProviderFor(QueryChangeNotifier)
-const queryChangeProvider = QueryChangeNotifierProvider._();
+@ProviderFor(SearchQuery)
+const searchQueryProvider = SearchQueryProvider._();
 
-final class QueryChangeNotifierProvider
-    extends $NotifierProvider<QueryChangeNotifier, String> {
-  const QueryChangeNotifierProvider._()
+final class SearchQueryProvider extends $NotifierProvider<SearchQuery, String> {
+  const SearchQueryProvider._()
     : super(
         from: null,
         argument: null,
         retry: null,
-        name: r'queryChangeProvider',
+        name: r'searchQueryProvider',
         isAutoDispose: true,
         dependencies: null,
         $allTransitiveDependencies: null,
       );
 
   @override
-  String debugGetCreateSourceHash() => _$queryChangeNotifierHash();
+  String debugGetCreateSourceHash() => _$searchQueryHash();
 
   @$internal
   @override
-  QueryChangeNotifier create() => QueryChangeNotifier();
+  SearchQuery create() => SearchQuery();
 
   /// {@macro riverpod.override_with_value}
   Override overrideWithValue(String value) {
@@ -41,10 +40,9 @@ final class QueryChangeNotifierProvider
   }
 }
 
-String _$queryChangeNotifierHash() =>
-    r'e86df5a99b156d157083fd2de691425a967c7217';
+String _$searchQueryHash() => r'a06f6816a85e77089bcde67ba1cb9cd98e691301';
 
-abstract class _$QueryChangeNotifier extends $Notifier<String> {
+abstract class _$SearchQuery extends $Notifier<String> {
   String build();
   @$mustCallSuper
   @override

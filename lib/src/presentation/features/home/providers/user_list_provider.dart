@@ -4,11 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:sokrio_assignment/src/core/base/base.dart';
 import 'package:sokrio_assignment/src/core/di/dependency_injection.dart';
-import 'package:sokrio_assignment/src/domain/entities/user.dart';
 import 'package:sokrio_assignment/src/domain/entities/user_list.dart';
 import 'package:sokrio_assignment/src/domain/use_cases/user_list_usecase.dart';
-import 'package:sokrio_assignment/src/presentation/features/home/providers/query_provider.dart';
-
 part 'user_list_provider.g.dart';
 
 class UserListNotifier {
@@ -64,33 +61,4 @@ Future<UserList?> getUserList(Ref ref, {required String endPoint}) async {
       message: "Something went wrong",
     ),
   };
-}
-
-@riverpod
-Future<UserList?> getFilteredUserList(
-  Ref ref, {
-  required String endPoint,
-}) async {
-  final query = ref.watch(queryChangeProvider);
-  final userList = await ref.watch(
-    getUserListProvider(endPoint: endPoint).future,
-  );
-
-  if (userList == null || userList.data == null || userList.data!.isEmpty) {
-    return null;
-  }
-
-  // If query is empty, return all users
-  if (query.trim().isEmpty) {
-    return userList;
-  }
-
-  final filtered = userList.data?.where((user) {
-    final searchLower = query.toLowerCase();
-    return user.firstName.toLowerCase().contains(searchLower) ||
-        user.lastName.toLowerCase().contains(searchLower) ||
-        user.email.toLowerCase().contains(searchLower);
-  }).toList();
-
-  return userList.copyWith(data: filtered);
 }
