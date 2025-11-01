@@ -1,13 +1,10 @@
 # 🏗️ Sokrio Assignment
 
-A **production-ready Flutter app** built with:
-
 - 🧱 Clean Architecture (Data, Domain, Presentation)
 - 💡 SOLID Principles
 - 🪄 Riverpod + Code Generation (`riverpod_annotation`)
 - 🔌 Dio Networking with Interceptors
 - 💾 Isar Database + SharedPreferences
-- 🌍 Localization (ARB files)
 - 🧭 GoRouter Navigation
 - 🧠 Dependency Injection (GetIt or Riverpod-based)
 - 🎨 Theming, Dimensions, Colors, and Common Widgets
@@ -92,7 +89,6 @@ UI layer — widgets, screens, providers, and GoRouter navigation.
 
 ## 🧩 Common Features
 
-- **Localization:** ARB-based, easy to extend for multiple languages
 - **Routing:** GoRouter with named paths and modular setup
 - **Theming:** Centralized colors, typography, spacing, and dimensions
 - **Networking:** Dio with custom interceptors for auth and error handling
