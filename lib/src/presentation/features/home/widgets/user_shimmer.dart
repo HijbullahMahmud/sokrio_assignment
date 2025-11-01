@@ -7,7 +7,8 @@ class UserShimmer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: BoxConstraints(maxHeight: 50),
+      height: MediaQuery.sizeOf(context).height * 0.06,
+      width: double.infinity,
       margin: EdgeInsets.all(5),
       child: Shimmer.fromColors(
         baseColor: Colors.grey[300]!,

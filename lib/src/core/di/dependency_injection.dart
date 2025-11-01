@@ -12,10 +12,10 @@ final injector = GetIt.instance;
 
 Future<void> initDependencies() async {
   // --- SharedPreferences ---
-  // final sharedPrefs = await SharedPreferences.getInstance();
-  // injector.registerLazySingleton<CacheService>(
-  //   () => SharedPreferencesService(sharedPrefs),
-  // );
+  final sharedPrefs = await SharedPreferences.getInstance();
+  injector.registerLazySingleton<CacheService>(
+    () => SharedPreferencesService(sharedPrefs),
+  );
 
   //---Network service---//
   injector.registerLazySingleton<NetworkService>(() => NetworkService());
