@@ -128,3 +128,78 @@ final class GetUserListFamily extends $Family
   @override
   String toString() => r'getUserListProvider';
 }
+
+@ProviderFor(getFilteredUserList)
+const getFilteredUserListProvider = GetFilteredUserListFamily._();
+
+final class GetFilteredUserListProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<UserList?>,
+          UserList?,
+          FutureOr<UserList?>
+        >
+    with $FutureModifier<UserList?>, $FutureProvider<UserList?> {
+  const GetFilteredUserListProvider._({
+    required GetFilteredUserListFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'getFilteredUserListProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$getFilteredUserListHash();
+
+  @override
+  String toString() {
+    return r'getFilteredUserListProvider'
+        ''
+        '($argument)';
+  }
+
+  @$internal
+  @override
+  $FutureProviderElement<UserList?> $createElement($ProviderPointer pointer) =>
+      $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<UserList?> create(Ref ref) {
+    final argument = this.argument as String;
+    return getFilteredUserList(ref, endPoint: argument);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is GetFilteredUserListProvider && other.argument == argument;
+  }
+
+  @override
+  int get hashCode {
+    return argument.hashCode;
+  }
+}
+
+String _$getFilteredUserListHash() =>
+    r'0eb86635118aba812bcc15a535e7a5df8cfd93fe';
+
+final class GetFilteredUserListFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<UserList?>, String> {
+  const GetFilteredUserListFamily._()
+    : super(
+        retry: null,
+        name: r'getFilteredUserListProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
+
+  GetFilteredUserListProvider call({required String endPoint}) =>
+      GetFilteredUserListProvider._(argument: endPoint, from: this);
+
+  @override
+  String toString() => r'getFilteredUserListProvider';
+}

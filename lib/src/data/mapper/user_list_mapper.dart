@@ -23,7 +23,7 @@ class UserMapper {
       perPage: entity.perPage,
       total: entity.total,
       totalPages: entity.totalPages,
-      data: entity.data.map(toModelUser).toList(),
+      data: entity.data?.map(toModelUser).toList(),
     );
   }
 
