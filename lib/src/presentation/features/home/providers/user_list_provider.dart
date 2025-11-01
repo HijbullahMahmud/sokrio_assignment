@@ -23,7 +23,6 @@ class UserListNotifier {
 @riverpod
 UserListNotifier userList(Ref ref) => UserListNotifier();
 
-
 @riverpod
 Future<UserList?> getUserList(Ref ref, {required String endPoint}) async {
   final repo = ref.watch(userListProvider);

@@ -16,26 +16,17 @@ class UserListDatasourceImpl implements UserListDatasource {
     required String endPoint,
     CancelToken? cancelToken,
   }) async {
-    try {
-      var response = await networkService.get(
-        endPoint,
-        cancelToken: cancelToken,
-      );
-      return response.fold((error) => throw error, (success) async {
-        final jsonData = success.data;
-        if (jsonData == null) {
-          return throw Failure(
-            type: FailureType.notFound,
-            message: "Can't fetch data",
-          );
-        }
-        print("Data: -------------$jsonData");
-        // var parseData = await compute(userListFromJson, jsonEncode(jsonData));
-        var data = UserListModel.fromJson(jsonData);
-        return data;
-      });
-    } catch (e) {
-      rethrow;
-    }
+    var response = await networkService.get(endPoint, cancelToken: cancelToken);
+    return response.fold((error) => throw error, (success) async {
+      final jsonData = success.data;
+      if (jsonData == null) {
+        return throw Failure(
+          type: FailureType.notFound,
+          message: "Can't fetch data",
+        );
+      }
+      var parseData = await compute(userListFromJson, jsonEncode(jsonData));
+      return parseData;
+    });
   }
 }

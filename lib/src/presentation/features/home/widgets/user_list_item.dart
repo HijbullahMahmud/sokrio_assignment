@@ -13,12 +13,7 @@ class UserListItem extends StatelessWidget {
       onTap: () {
         context.pushNamed(Routes.detail, extra: user);
       },
-      title: Text(
-        "${user.firstName} ${user.lastName}",
-        style: Theme.of(
-          context,
-        ).textTheme.bodyLarge?.copyWith(color: Colors.black),
-      ),
+      title: Text("${user.firstName} ${user.lastName}"),
       leading: CircleAvatar(backgroundImage: NetworkImage(user.avatar)),
     );
   }

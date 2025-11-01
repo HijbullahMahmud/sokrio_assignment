@@ -40,11 +40,6 @@ class NetworkService {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
-          // Attach token from Riverpod TokenNotifier
-          // final token = ref.read(tokenProvider);
-          // if (token != null && token.isNotEmpty) {
-          //   options.headers['Authorization'] = 'Bearer $token';
-          // }
           handler.next(options);
         },
         onError: (error, handler) {

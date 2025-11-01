@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:sokrio_assignment/src/core/constants/constants.dart';
+import 'package:sokrio_assignment/src/data/services/network/exceptions/failure.dart';
+import 'package:sokrio_assignment/src/presentation/core/widgets/error_view.dart';
 import 'package:sokrio_assignment/src/presentation/core/widgets/loading_indicator.dart';
 import 'package:sokrio_assignment/src/presentation/features/home/providers/user_list_provider.dart';
 import 'package:sokrio_assignment/src/presentation/features/home/widgets/user_list_item.dart';
@@ -15,6 +18,10 @@ class HomePage extends StatefulHookConsumerWidget {
 
 class _HomePageState extends ConsumerState<HomePage> {
   static const pageSize = 10;
+
+  Future<void> retry() async {
+    ref.invalidate(userListProvider);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +71,16 @@ class _HomePageState extends ConsumerState<HomePage> {
               );
             },
           ),
-          error: (error, _) => Center(child: Text(error.toString())),
+          error: (error, stack) {
+            if (error is Failure) {
+              return Center(
+                child: ErrorView(message: error.error, onRetry: retry),
+              );
+            }
+            return Center(
+              child: ErrorView(message: error.toString(), onRetry: retry),
+            );
+          },
           loading: () => Center(child: LoadingIndicator()),
         ),
       ),

@@ -12,7 +12,7 @@ class _LightTextColors extends TextColors {
   const _LightTextColors();
 
   @override
-  Color get primary => _Primitive.neutral50;
+  Color get primary => _Primitive.neutral0;
 
   @override
   Color get secondary => _Primitive.neutral40;
