@@ -8,6 +8,16 @@ List<GoRoute> _homeRoutes(Ref ref) {
       pageBuilder: (context, state) {
         return const MaterialPage(child: HomePage());
       },
+      routes: [
+        GoRoute(
+          path: Routes.detail,
+          name: Routes.detail,
+          pageBuilder: (context, state) {
+            User user = state.extra as User;
+            return MaterialPage(child: UserDetailScreen(user: user));
+          },
+        ),
+      ],
     ),
   ];
 }

@@ -12,9 +12,15 @@ class UserListDatasourceImpl implements UserListDatasource {
   UserListDatasourceImpl({required this.networkService});
 
   @override
-  Future<UserListModel> userList({required String endPoint, CancelToken? cancelToken}) async {
+  Future<UserListModel> userList({
+    required String endPoint,
+    CancelToken? cancelToken,
+  }) async {
     try {
-      var response = await networkService.get(endPoint, cancelToken: cancelToken);
+      var response = await networkService.get(
+        endPoint,
+        cancelToken: cancelToken,
+      );
       return response.fold((error) => throw error, (success) async {
         final jsonData = success.data;
         if (jsonData == null) {
@@ -23,9 +29,10 @@ class UserListDatasourceImpl implements UserListDatasource {
             message: "Can't fetch data",
           );
         }
-
-        var parseData = await compute(userListFromJson, jsonEncode(jsonData));
-        return parseData;
+        print("Data: -------------$jsonData");
+        // var parseData = await compute(userListFromJson, jsonEncode(jsonData));
+        var data = UserListModel.fromJson(jsonData);
+        return data;
       });
     } catch (e) {
       rethrow;
